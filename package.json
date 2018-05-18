@@ -1,0 +1,23 @@
+{
+  "name": "ksfs",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/KAESapps/ksfs.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/KAESapps/ksfs/issues"
+  },
+  "homepage": "https://github.com/KAESapps/ksfs#readme",
+  "dependencies": {
+    "file-saver": "1.3.8",
+    "sanitize-filename": "1.6.1"
+  }
+}
