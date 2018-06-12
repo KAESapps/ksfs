@@ -1,4 +1,9 @@
-module.exports = (fileEntry, fileBlob) => {
+const isString = require("lodash/isString")
+
+module.exports = (fileEntry, data) => {
+  if (isString(data)) {
+    data = new Blob([new TextEncoder().encode(data)])
+  }
   return new Promise((resolve, reject) => {
     fileEntry.createWriter(function(fileWriter) {
       fileWriter.onwriteend = function(e) {
@@ -7,7 +12,7 @@ module.exports = (fileEntry, fileBlob) => {
 
       fileWriter.onerror = reject
 
-      fileWriter.write(fileBlob)
+      fileWriter.write(data)
     }, reject)
   })
 }
