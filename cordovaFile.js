@@ -65,10 +65,3 @@ exports.writeFile = args => {
 exports.readFile = fileEntry => {
   return new Promise(fileEntry.file.bind(fileEntry)).then(readAsText)
 }
-
-exports.openFile = args => {
-  const { path, type } = args
-  return new Promise((success, error) => {
-    cordova.plugins.fileOpener2.open(path, type, { error, success })
-  })
-}
