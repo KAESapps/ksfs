@@ -1,11 +1,6 @@
-module.exports = fileContent =>
-  new Promise((resolve, reject) => {
-    var reader = new FileReader()
-    reader.onloadend = function() {
-      const data = new Uint8Array(this.result)
-      const blob = new Blob([data], { type: fileContent.type })
-      resolve(blob)
-    }
-    reader.onerror = reject
-    reader.readAsArrayBuffer(fileContent)
-  })
+const implementations = {
+  browser: require("./fileContentToBlobHTML5"),
+  android: require("./fileContentToBlobHTML5"),
+  windows: require("./fileContentToBlobWindows"),
+}
+module.exports = implementations[process.env.PLATFORM]

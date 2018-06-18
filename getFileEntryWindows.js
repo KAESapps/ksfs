@@ -23,15 +23,22 @@ const createDir = dir =>
     })
   })
 
+const fileExists = path =>
+  new Promise(resolve =>
+    fs.access(
+      path,
+      fs.constants.F_OK,
+      err => (err ? resolve(false) : resolve(true))
+    )
+  )
+
 module.exports = (fsRootName, filePath, opts = {}) => {
   const { create = false, dir = false } = opts
 
   const fullPath = path.join(fsRoots(fsRootName), filePath)
   const dirPath = dir ? fullPath : path.dirname(fullPath)
 
-  return Promise.resolve()
-    .then(() => {
-      if (create) return createDir(dirPath)
-    })
-    .then(() => fullPath)
+  return create
+    ? createDir(dirPath).then(() => fullPath)
+    : fileExists(fullPath).then(exists => (exists ? fullPath : null))
 }
