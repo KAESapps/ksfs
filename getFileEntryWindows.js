@@ -10,7 +10,7 @@ const fsRoots = fsName => {
     return "D:\\"
   } else
     return electron.remote.app.getPath(
-      fsName === "default" ? "documents" : fsName
+      fsName === "default" ? "userData" : fsName
     )
 }
 
