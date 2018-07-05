@@ -29,9 +29,10 @@ const getFsRoot = memoize(fsName => {
   } else
     return Promise.resolve(
       {
-        default: cordova.file.dataDirectory,
+        privateAppData: cordova.file.dataDirectory,
+        temp: cordova.file.cacheDirectory,
         home: cordova.file.externalRootDirectory,
-        temp: cordova.file.externalCacheDirectory,
+        publicAppData: cordova.file.externalDataDirectory,
       }[fsName]
     )
 })

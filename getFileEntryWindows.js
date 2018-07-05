@@ -10,7 +10,9 @@ const fsRoots = fsName => {
     return "D:\\"
   } else
     return electron.remote.app.getPath(
-      fsName === "default" ? "userData" : fsName
+      fsName === "privateAppData" || fsName === "publicAppData"
+        ? "userData"
+        : fsName
     )
 }
 

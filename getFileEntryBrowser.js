@@ -1,6 +1,8 @@
 const fsRoots = {
-  default: window.PERSISTENT,
+  privateAppData: window.PERSISTENT,
+  publicAppData: window.TEMPORARY,
   temp: window.TEMPORARY,
+  home: window.PERSISTENT,
 }
 
 const getDirectory = (rootDirEntry, dirName, opts) =>
