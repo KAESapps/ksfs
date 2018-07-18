@@ -30,7 +30,7 @@ const getFsRoot = memoize(fsName => {
     return Promise.resolve(
       {
         privateAppData: cordova.file.dataDirectory,
-        temp: cordova.file.cacheDirectory,
+        temp: cordova.file.externalCacheDirectory,
         home: cordova.file.externalRootDirectory,
         publicAppData: cordova.file.externalDataDirectory,
       }[fsName]
