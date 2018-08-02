@@ -2,7 +2,7 @@ const sanitize = require("sanitize-filename")
 const writeFile = require("./writeFileWindows")
 
 module.exports = args => {
-  const { name, dir, content } = args
+  const { name, dir, data } = args
 
   const defaultPath = window.require("path").format({
     dir,
@@ -19,8 +19,8 @@ module.exports = args => {
       reject(new Error("canceledByUser"))
     }
 
-    writeFile({ name: path, content })
-      .then(() => resolve({ path }))
+    writeFile(path, data)
+      .then(() => resolve(path))
       .catch(reject)
   })
 }
