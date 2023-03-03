@@ -9,8 +9,8 @@ module.exports = (fileEntry, data) => {
     data = new Blob([data])
   }
   return new Promise((resolve, reject) => {
-    fileEntry.createWriter(function(fileWriter) {
-      fileWriter.onwriteend = function(e) {
+    fileEntry.createWriter(function (fileWriter) {
+      fileWriter.onwriteend = function (e) {
         resolve()
       }
 
