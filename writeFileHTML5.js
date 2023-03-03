@@ -1,10 +1,10 @@
 const isString = require("lodash/isString")
 
 module.exports = (fileEntry, data) => {
-  if (isString(data)) {
-    // string to UInt8Array
-    data = new TextEncoder().encode(data)
-  }
+  // if (isString(data)) {
+  //   // string to UInt8Array
+  //   data = new TextEncoder().encode(data)
+  // }
   if (data instanceof Uint8Array) {
     data = new Blob([data])
   }
