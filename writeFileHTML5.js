@@ -1,6 +1,7 @@
 const isString = require("lodash/isString")
 
 module.exports = (fileEntry, data) => {
+  // pas besoin de convertir les strings en binaire, normalement on peut les écrire directement
   // if (isString(data)) {
   //   // string to UInt8Array
   //   data = new TextEncoder().encode(data)

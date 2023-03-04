@@ -1,7 +1,6 @@
 //télécharge un fichier en le streamant dans un fichier temporaire
 // puis le déplace à l'emplacement voulu
 // et renvoi le fileEntry de l'emplacement final
-//TODO: ecrire dans un fichier temporaire
 const writeBatchSize = 1024 * 1024 * 1 // 1 MB
 const moveFile = require("./moveFile")
 const getFileEntry = require("./getFileEntry")
@@ -18,6 +17,9 @@ module.exports = (url, dirEntry, name, { onProgress } = {}) => {
   const downloadHandler = getFileEntry("temp", name, { create: true })
     .then((fe) => {
       tempFileEntry = fe
+      return deleteFile(tempFileEntry) // s'assure qu'il n'y a pas de fichier partiellement écrit
+    })
+    .then(() => {
       return createFileWriter(tempFileEntry)
     })
     .then((fw) => {
