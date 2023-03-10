@@ -17,9 +17,6 @@ module.exports = (url, dirEntry, name, { onProgress } = {}) => {
   const downloadHandler = getFileEntry("temp", name, { create: true })
     .then((fe) => {
       tempFileEntry = fe
-      return deleteFile(tempFileEntry) // s'assure qu'il n'y a pas de fichier partiellement écrit
-    })
-    .then(() => {
       return createFileWriter(tempFileEntry)
     })
     .then((fw) => {
