@@ -1,7 +1,6 @@
 //télécharge un fichier en le streamant dans un fichier temporaire
 // puis le déplace à l'emplacement voulu
 // et renvoi le fileEntry de l'emplacement final
-//TODO: ecrire dans un fichier temporaire
 const writeBatchSize = 1024 * 1024 * 1 // 1 MB
 const moveFile = require("./moveFile")
 const getFileEntry = require("./getFileEntry")
