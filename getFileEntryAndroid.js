@@ -31,7 +31,7 @@ const getFsRoot = memoize(fsName => {
       {
         privateAppData: cordova.file.dataDirectory,
         temp: cordova.file.externalCacheDirectory,
-        home: cordova.file.externalRootDirectory,
+        home: cordova.file.externalDataDirectory, // anciennement externalRootDirectory, mais plus dispo depuis Android API 29
         publicAppData: cordova.file.externalDataDirectory,
       }[fsName]
     )
@@ -95,10 +95,9 @@ module.exports = (fsRootName, path, opts = {}) => {
 
               if (create) {
                 // create directory hierarchy then get file
-                return createDirHierarchy(
-                  fs,
-                  path.split("/").slice(0, -1)
-                ).then(getFileEntry)
+                return createDirHierarchy(fs, path.split("/").slice(0, -1))
+                  .then(getFileEntry)
+                  .catch(reject)
               } else {
                 getFileEntry()
               }
