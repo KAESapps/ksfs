@@ -3,13 +3,12 @@ const fs = electronRequire("fs")
 const path = electronRequire("path")
 
 const electron = electronRequire("electron")
-const ipcRenderer = electron.ipcRenderer
 
 const fsRoots = (fsName) => {
   if (fsName === "external") {
     return Promise.resolve("D:\\")
   } else
-    return ipcRenderer.invoke(
+    return electron.ipcRenderer.invoke(
       "getPath",
       fsName === "privateAppData" || fsName === "publicAppData"
         ? "userData"
