@@ -1,16 +1,17 @@
 const sanitize = require("sanitize-filename")
 const writeFile = require("./writeFileWindows")
+const electronRequire = require("./utils/electronRequire")
 
-module.exports = args => {
+module.exports = (args) => {
   const { name, dir, data } = args
 
-  const defaultPath = window.require("path").format({
+  const defaultPath = electronRequire("path").format({
     dir,
     base: sanitize(name),
   })
 
-  return new Promise(function(resolve, reject) {
-    const remote = window.require("electron").remote
+  return new Promise(function (resolve, reject) {
+    const remote = electronRequire("electron").remote
     const path = remote.dialog.showSaveDialog(remote.getCurrentWindow(), {
       defaultPath,
     })

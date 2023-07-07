@@ -1,10 +1,11 @@
+const electronRequire = require("./utils/electronRequire")
+
 module.exports = (dir) => {
-  return new Promise(function(resolve, reject) {
-    window.require('fs').readdir(dir, function(err, files) {
+  return new Promise(function (resolve, reject) {
+    electronRequire("fs").readdir(dir, function (err, files) {
       if (err) {
         reject(err)
-      }
-      else {
+      } else {
         resolve(files)
       }
     })
