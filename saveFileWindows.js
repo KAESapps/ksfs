@@ -10,18 +10,17 @@ module.exports = (args) => {
     base: sanitize(name),
   })
 
-  return new Promise(function (resolve, reject) {
-    const remote = electronRequire("electron").remote
-    const path = remote.dialog.showSaveDialog(remote.getCurrentWindow(), {
+  const dialog = electronRequire("@electron/remote").dialog
+
+  return dialog
+    .showSaveDialog({
       defaultPath,
     })
+    .then(({ canceled, filePath }) => {
+      if (canceled || !filePath) {
+        throw new Error("canceledByUser")
+      }
 
-    if (!path) {
-      reject(new Error("canceledByUser"))
-    }
-
-    writeFile(path, data)
-      .then(() => resolve(path))
-      .catch(reject)
-  })
+      return writeFile(filePath, data).then(() => resolve(filePath))
+    })
 }
