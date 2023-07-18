@@ -21,6 +21,6 @@ module.exports = (args) => {
         throw new Error("canceledByUser")
       }
 
-      return writeFile(filePath, data).then(() => resolve(filePath))
+      return writeFile(filePath, data).then(() => filePath)
     })
 }
