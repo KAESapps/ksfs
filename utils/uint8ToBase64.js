@@ -4,5 +4,5 @@ module.exports = function uint8ToBase64(buffer) {
   for (var i = 0; i < len; i++) {
     binary += String.fromCharCode(buffer[i])
   }
-  return window.btoa(binary)
+  return btoa(binary)
 }
