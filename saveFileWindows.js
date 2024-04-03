@@ -10,7 +10,12 @@ module.exports = (args) => {
     base: sanitize(name),
   })
 
-  const dialog = electronRequire("@electron/remote").dialog
+  let dialog
+  try {
+    dialog = electronRequire("@electron/remote").dialog
+  } catch (err) {
+    console.debug("using old electron saveFile implementation")
+  }
 
   //ancienne implémentation electron
   if (!dialog) {
