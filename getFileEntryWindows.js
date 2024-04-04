@@ -7,13 +7,17 @@ const electron = electronRequire("electron")
 const fsRoots = (fsName) => {
   if (fsName === "external") {
     return Promise.resolve("D:\\")
-  } else
-    return electron.ipcRenderer.invoke(
-      "getPath",
-      fsName === "privateAppData" || fsName === "publicAppData"
+  } else {
+    fsName =
+      fsName === ("privateAppData" || fsName === "publicAppData")
         ? "userData"
         : fsName
-    )
+    //ancienne implmémentation
+    if (!electron.ipcRenderer.invoke) {
+      return electron.remote.app.getPath(fsName)
+    }
+    return electron.ipcRenderer.invoke("getPath", fsName)
+  }
 }
 
 const createDir = (dir) =>
