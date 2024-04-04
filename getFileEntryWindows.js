@@ -24,7 +24,10 @@ const createDir = (dir) =>
   new Promise(function (resolve, reject) {
     if (!dir) return resolve()
     fs.mkdir(dir, { recursive: true }, function (err) {
-      if (err) return reject(err)
+      if (err) {
+        if (err.code === "EEXIST") return resolve()
+        return reject(err)
+      }
       resolve()
     })
   })
