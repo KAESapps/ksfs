@@ -14,7 +14,7 @@ const fsRoots = (fsName) => {
         : fsName
     //ancienne implmémentation
     if (!electron.ipcRenderer.invoke) {
-      return electron.remote.app.getPath(fsName)
+      return Promise.resolve(electron.remote.app.getPath(fsName))
     }
     return electron.ipcRenderer.invoke("getPath", fsName)
   }
