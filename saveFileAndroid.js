@@ -1,8 +1,8 @@
-const getFileEntryAndroid = require("./getFileEntryAndroid")
+const getFileEntry = require("./getFileEntryAndroid")
 
-module.exports = args => {
+module.exports = (args) => {
   const { name, data } = args
-  return getFileEntry("home", name, { create: true }).then(fileEntry =>
+  return getFileEntry("home", name, { create: true }).then((fileEntry) =>
     writeFile(fileEntry, data)
   )
 }
