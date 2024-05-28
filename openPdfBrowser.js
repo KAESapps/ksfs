@@ -1,23 +1,14 @@
 const sanitize = require("sanitize-filename")
 
-
-module.exports = args => {
+module.exports = (args) => {
+  let urlCreator = window.URL || window.webkitURL
   const { name, data } = args
   const blob = new File([data], name, { type: "application/pdf" })
-
-  return new Promise((resolve, reject) => {
-    try {
-      let win = window.open("", "_blank")
-      if (win === null) {
-        throw new Error("Open PDF in new window blocked by browser")
-      }
-      let urlCreator = window.URL || window.webkitURL
-      let url = urlCreator.createObjectURL(blob)
-      win.location.href = url
-      resolve()
-    } catch (e) {
-      win.close()
-      reject(e)
-    }
-  })
+  let url = urlCreator.createObjectURL(blob)
+  const win = window.open(url, "_blank")
+  if (!win)
+    return Promise.reject(
+      new Error("La prévisualisation du pdf a été bloquée par votre navigateur")
+    )
+  return Promise.resolve()
 }
