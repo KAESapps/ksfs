@@ -1,4 +1,5 @@
 const getFileEntry = require("./getFileEntryAndroid")
+const writeFile = require("./writeFileAndroid")
 
 module.exports = (args) => {
   const { name, data } = args
